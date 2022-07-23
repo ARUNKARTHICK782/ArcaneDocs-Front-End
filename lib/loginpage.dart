@@ -32,6 +32,62 @@ class _loginpageState extends State<loginpage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
+              children: [
+                Expanded(flex:2,child: Container()),
+                Expanded(
+                  flex: 5,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Color(0xffede9e8),
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: "Email"
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(flex: 2, child: Container())
+              ],
+            ),
+            SizedBox(height: 10,),
+            Row(
+              children: [
+                Expanded(flex:2,child: Container()),
+                Expanded(
+                  flex: 5,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Color(0xffede9e8),
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    height: 60,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            hintText: "Password"
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(flex: 2, child: Container())
+              ],
+            ),
+            SizedBox(height: 10,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(onPressed: (){}, child: Text('Login'))
+              ],
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(onPressed: (){
