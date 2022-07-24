@@ -67,8 +67,10 @@ class _addfileState extends State<addfile> {
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
-                        child: Image(
-                            image: FileImage(files.elementAt(index))
+                        child: Card(
+                            child: Image(
+                                image: FileImage(files.elementAt(index))
+                            ),
                         ),
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>filePreviewPage(files.elementAt(index))));
@@ -106,7 +108,7 @@ class _addfileState extends State<addfile> {
                     });
                   });
           }, child: Text("Upload"))
-              : ElevatedButton(
+              : CupertinoButton(
                   onPressed: () async {
                     files.clear();
                     files = (await filePickerFunc());
