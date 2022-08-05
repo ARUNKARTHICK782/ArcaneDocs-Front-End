@@ -12,7 +12,16 @@ class homepage extends StatefulWidget {
   State<homepage> createState() => _homepageState();
 }
 
-class _homepageState extends State<homepage> {
+class _homepageState extends State<homepage> with SingleTickerProviderStateMixin{
+  late TabController _tabController;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +45,30 @@ class _homepageState extends State<homepage> {
           ],
         ),
       ),
-      body: Center(
-        child: Text("Hello MyCloud"),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          TabBar(
+            labelColor: Colors.black,
+            controller: _tabController,
+            tabs: [
+              Tab(
+                child: Text("My Posts"),
+              ),
+              Tab(
+                child: Text("Shared with me"),
+              )
+            ],
+          ),
+          Expanded(
+            child: TabBarView(
+                controller: _tabController,
+                children: [
+              Center(child: Text("My Posts"),),
+              Center(child: Text("Shared with me"),)
+            ]),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),

@@ -59,42 +59,57 @@ class _addfileState extends State<addfile> {
 
           (fileBool)
               ? Expanded(
-                child: GridView.builder(
-                    itemCount: files.length,
-                    shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    ),
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        child: Card(
-                            child: Image(
-                                image: FileImage(files.elementAt(index))
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GridView.builder(
+                      itemCount: files.length,
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                      ),
+                      itemBuilder: (BuildContext context, int index) {
+                        return Dismissible(
+                          key: UniqueKey(),
+                          onDismissed: (DismissDirection direction){
+                            setState(() {
+                              files.removeAt(index);
+                            });
+                          },
+                          child: GestureDetector(
+                            child: Card(
+                              elevation: 3,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Image(
+                                      image: FileImage(files.elementAt(index))
+                                  ),
+                                ),
                             ),
-                        ),
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>filePreviewPage(files.elementAt(index))));
-                        },
-                        onLongPress: (){
-                          showDialog(context: context, builder: (BuildContext context){
-                            return AlertDialog(
-                              content: Text("Do you want to remove this file ?"),
-                              actions: [
-                                TextButton(onPressed: (){
-                                  setState(() {
-                                    files.removeAt(index);
-                                  });
-                                  Navigator.pop(context);
-                                }, child: Text("Yes")),
-                                TextButton(onPressed: (){
-                                  Navigator.pop(context);
-                                }, child: Text("No"))
-                              ],
-                            );
-                          });
-                        },
-                      );
-                    }),
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>filePreviewPage(files.elementAt(index))));
+                            },
+                            onLongPress: (){
+                              showDialog(context: context, builder: (BuildContext context){
+                                return AlertDialog(
+                                  content: Text("Do you want to remove this file ?"),
+                                  actions: [
+                                    TextButton(onPressed: (){
+                                      setState(() {
+                                        files.removeAt(index);
+                                      });
+                                      Navigator.pop(context);
+                                    }, child: Text("Yes")),
+                                    TextButton(onPressed: (){
+                                      Navigator.pop(context);
+                                    }, child: Text("No"))
+                                  ],
+                                );
+                              });
+                            },
+                          ),
+                        );
+                      }),
+                ),
               )
               : Text("Upload a file"),
           (fileBool)

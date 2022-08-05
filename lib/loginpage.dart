@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mycloud/apihandler.dart';
 import 'package:mycloud/homepage.dart';
 
 class loginpage extends StatefulWidget {
@@ -91,8 +92,9 @@ class _loginpageState extends State<loginpage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(onPressed: (){
-                  signInWithGoogle().then((value){
+                  signInWithGoogle().then((value) async{
                     print(value.user?.email);
+                    await postUser(value.user?.uid ?? " ");
                     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>homepage()), (route) => false);
                   });
                 }, child: Image(

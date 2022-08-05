@@ -49,4 +49,5 @@ app.*.map.json
 
 #Firebase
 lib/firebaseOptions.dart
+lib/apiLink.dart
 
